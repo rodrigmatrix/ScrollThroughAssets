@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Console-like Component</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .console-container {
+        width: 400px;
+        margin: 50px auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .console-log {
+        height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .console-input {
+        width: 100%;
+        padding: 5px;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+
+<div class="console-container">
+    <div class="console-log" id="console-log">
+        <!-- Log messages will appear here -->
+    </div>
+    <input type="text" class="console-input" id="console-input" placeholder="Type here...">
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var logContainer = document.getElementById('console-log');
+        var inputField = document.getElementById('console-input');
+
+        function logMessage(message) {
+            var logItem = document.createElement('div');
+            logItem.textContent = message;
+            logContainer.appendChild(logItem);
+            // Scroll to bottom
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        inputField.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                var inputText = inputField.value.trim();
+                if (inputText !== '') {
+                    logMessage('> ' + inputText);
+                    // Here you can do whatever you want with the inputText
+                    // For now, just clearing the input field
+                    inputField.value = '';
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
